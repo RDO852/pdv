@@ -1,5 +1,5 @@
 <?php
-$databaseFile = 'C:\SQLite/pdv.sqlite'; // Define o caminho para o arquivo do banco de dados SQLite
+$databaseFile = 'C:\Users\User\Desktop\pdv projeto\SQLite\pdv.sqlite'; // Define o caminho para o arquivo do banco de dados SQLite
 
 try {
     // Para SQLite, o DSN (Data Source Name) é 'sqlite:' seguido do caminho para o arquivo do banco de dados
