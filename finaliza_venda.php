@@ -82,5 +82,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 echo json_encode($response);
-// Não há necessidade da tag de fechamento ?> em arquivos que contêm apenas código PHP
-// exit(); // O exit() já está no final, mas pode ser usado para parar a execução explicitamente em pontos específicos

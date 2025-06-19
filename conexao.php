@@ -1,12 +1,11 @@
 <?php
-$host = 'localhost';
-$db = 'pdv';
-$user = 'root';
-$pass = 'vtgd65aoty';
+$databaseFile = 'C:\SQLite/pdv.sqlite'; // Define o caminho para o arquivo do banco de dados SQLite
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    // Para SQLite, o DSN (Data Source Name) é 'sqlite:' seguido do caminho para o arquivo do banco de dados
+    $pdo = new PDO("sqlite:$databaseFile");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Para SQLite, a configuração de charset geralmente não é necessária no DSN.
 } catch (PDOException $e) {
     // Para requisições AJAX, retorne JSON
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
@@ -19,4 +18,3 @@ try {
         die("Erro na conexão com o banco de dados: " . $e->getMessage());
     }
 }
-// Não há necessidade da tag de fechamento ?> em arquivos que contêm apenas código PHP

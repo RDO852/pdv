@@ -15,4 +15,3 @@ if (!isset($_SESSION['user_id'])) {
         exit;
     }
 }
-// Não há necessidade da tag de fechamento ?> em arquivos que contêm apenas código PHP
