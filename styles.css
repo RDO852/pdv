@@ -1,0 +1,371 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Alinha o conteúdo verticalmente */
+    align-items: center;   /* Centraliza horizontalmente o PDV/Login */
+    justify-content: center; /* Centraliza verticalmente o PDV/Login */
+    overflow: hidden; /* Evita barras de rolagem desnecessárias */
+}
+
+/* TELA DE LOGIN - Visível por padrão */
+#telaLogin {
+    position: fixed; /* Fixa a tela de login sobre o conteúdo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+    display: flex; /* Para centralizar o box de login */
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Garante que fique por cima */
+}
+
+.login-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    width: 300px;
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: #0056b3;
+}
+
+/* CONTAINER DO PDV - Oculto por padrão, visível via JS após login */
+#containerPDV {
+    display: none; /* Inicia oculto */
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    height: 90vh; /* Ocupa 90% da altura da viewport */
+    margin: auto; /* Centraliza horizontalmente */
+    display: flex; /* É um flexbox para seus painéis internos */
+}
+
+.container-pdv {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.painel-esquerdo, .painel-direito {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.painel-esquerdo {
+    flex: 2; /* Ocupa 2/3 do espaço */
+    border-right: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.painel-direito {
+    flex: 1; /* Ocupa 1/3 do espaço */
+    background-color: #fff;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.campo-grupo {
+    margin-bottom: 15px;
+}
+
+.campo-grupo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.campo-grupo input[type="text"] {
+    width: calc(100% - 22px); /* Ajusta para padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.campo-display {
+    background-color: #e9e9e9;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    min-height: 20px;
+    white-space: nowrap; /* Evita que o texto quebre */
+    overflow: hidden; /* Esconde o excesso */
+    text-overflow: ellipsis; /* Adiciona '...' se o texto for muito longo */
+}
+
+.formas-pagamento {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem linha */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.formas-pagamento button {
+    flex: 1 1 calc(50% - 10px); /* Cada botão ocupa ~50% com gap */
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formas-pagamento button:hover {
+    background-color: #218838;
+}
+
+#caixaProdutos {
+    border: 1px solid #ddd;
+    min-height: 250px;
+    max-height: 400px; /* Altura máxima para o carrinho */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo exceder */
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #fdfdfd;
+    flex-grow: 1; /* Permite que o carrinho ocupe o espaço disponível */
+}
+
+.produto-item-caixa {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.9em;
+    align-items: center; /* Alinha verticalmente */
+}
+
+.produto-item-caixa:last-child {
+    border-bottom: none; /* Remove a borda do último item */
+}
+
+.info-produto {
+    color: #444;
+    flex-grow: 1; /* Permite que ocupe o espaço */
+}
+
+.preco-total-item {
+    font-weight: bold;
+    color: #007bff;
+    text-align: right;
+    min-width: 80px; /* Garante que o preço tenha um espaço mínimo */
+}
+
+#totalVendaContainer {
+    border-top: 2px solid #007bff;
+    padding-top: 10px;
+    margin-top: auto; /* Empurra para o final do painel */
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-pdv {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-pdv button {
+    padding: 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-pdv button:hover {
+    background-color: #5a6268;
+}
+
+/* POPUPS GERAIS */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Acima de tudo */
+}
+
+.popup.hidden {
+    display: none; /* Esconde o popup */
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.popup-content h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+}
+
+.popup-content input {
+    width: calc(100% - 20px); /* Ajusta para padding */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    text-align: right; /* Para valores monetários */
+}
+
+.popup-content img {
+    display: block;
+    margin: 15px auto; /* Centraliza a imagem */
+}
+
+.botoes-popup {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.botoes-popup button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botoes-popup button:first-child {
+    background-color: #dc3545; /* Vermelho para cancelar */
+    color: white;
+}
+
+.botoes-popup button:first-child:hover {
+    background-color: #c82333;
+}
+
+.botoes-popup button:last-child {
+    background-color: #007bff; /* Azul para confirmar */
+    color: white;
+}
+
+.botoes-popup button:last-child:hover {
+    background-color: #0056b3;
+}
+
+/* CLASSE PARA ITENS TOTALMENTE CANCELADOS (VERMELHO E RISCADO) */
+.item-cancelado-vermelho {
+    color: #dc3545 !important;        /* Cor vermelha forte */
+    text-decoration: line-through !important; /* Linha sobre o texto */
+    opacity: 0.7;                     /* Para dar um leve desfoque visual, opcional */
+}
+
+/* Estilos para informações de quantidade de cancelamento parcial/total */
+.qtd-info-parcial-cancelada {
+    font-size: 0.8em;
+    color: #ffc107; /* Cor amarela/laranja para indicar cancelamento parcial */
+    font-weight: bold;
+}
+
+.qtd-info {
+    font-size: 0.8em;
+    color: #888; /* Cinza para a informação adicional (todas canceladas) */
+}
+
+/* Media Queries para responsividade básica (opcional) */
+@media (max-width: 768px) {
+    #containerPDV {
+        flex-direction: column;
+        height: auto;
+        max-height: 95vh;
+        width: 95%;
+    }
+
+    .painel-esquerdo, .painel-direito {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    .painel-direito {
+        margin-top: 15px;
+    }
+
+    #caixaProdutos {
+        max-height: 200px; /* Reduz a altura do carrinho em telas menores */
+    }
+}
