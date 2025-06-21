@@ -1,9 +1,9 @@
 <?php
 // Protege esta página para que só usuários logados possam acessá-la
-require_once 'check_login.php';
+require_once 'check_login.php'; //
 
 // Opcional: Pegar o nome do usuário para exibir na tela de boas-vindas
-$nomeUsuario = $_SESSION['nome_completo'] ?? $_SESSION['username'] ?? 'Usuário';
+$nomeUsuario = $_SESSION['nome_completo'] ?? $_SESSION['username'] ?? 'Usuário'; //
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -84,6 +84,7 @@ $nomeUsuario = $_SESSION['nome_completo'] ?? $_SESSION['username'] ?? 'Usuário'
         <div class="menu-buttons">
             <button onclick="window.location.href='pdv.php'">PDV</button>
             <button onclick="window.location.href='consultar_vendas.php'">Consultar Vendas</button>
+            <button onclick="window.location.href='cadastro_produto.php'">Cadastro de Produto</button>
         </div>
         <button class="logout-button" onclick="window.location.href='logout.php'">Sair</button>
     </div>
