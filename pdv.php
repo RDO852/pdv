@@ -11,6 +11,7 @@ require_once 'check_login.php';
   <title>Sistema PDV</title>
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* ... (seus estilos CSS existentes) ... */
     /* Estilos básicos para o layout do PDV. Você pode mover para styles.css se desejar. */
     body {
         font-family: Arial, sans-serif;
@@ -315,8 +316,9 @@ require_once 'check_login.php';
           <strong>Total da Venda: R$ <span id="totalVendaSpan">0.00</span></strong>
         </div>
         <div class="menu-pdv">
-            <button onclick="window.location.href='consultar_vendas.php'">Consultar Vendas</button>
-            <button onclick="fazerLogout()">Sair</button> </div>
+            <button onclick="window.location.href='menu.php'">MENU</button>
+            <button onclick="fazerLogout()">Sair</button>
+        </div>
       </div>
     </div>
   </div>
